@@ -3,6 +3,43 @@ import time
 from tkinter import *
 from datetime import datetime
 
+ardData = serial.Serial('com10',9600) #Create object to take data
+time.sleep(1)
+
+def updates():
+    dataPack = ardData.readline() #If there is data, store them in the dataPack variable
+    dataPack = str(dataPack,'utf-8') #Get rid of unwanted characters
+    dataPack = dataPack.strip('\r\n') #Get rid of the newline and other characters
+    print(dataPack)
+
+    if dataPack[0] == "1":
+        sf1_state.set("SF 1 - ACTIVE") 
+        label_sf1.config(background="green") 
+        label_sf1.update()
+
+    else:
+        sf1_state.set("SF 1 - INACTIVE")
+        label_sf1.config(background="red")  
+        label_sf1.update()
+
+        
+    if dataPack[2] == "1":
+
+        sf2_state.set("SF 2 - ACTIVE") 
+        label_sf2.config(background="green") 
+        label_sf2.update()
+
+    else:
+        sf2_state.set("SF 2 - INACTIVE")
+        label_sf2.config(background="red") 
+        label_sf2.update()
+
+
+
+
+    root.after(1000,updates)
+
+
 
 root = Tk()
 
