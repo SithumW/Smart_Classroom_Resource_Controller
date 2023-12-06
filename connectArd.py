@@ -2,166 +2,178 @@ import serial
 import time
 from tkinter import *
 from datetime import datetime
-from datetime import timedelta
 from tkinter import messagebox
+
 
 
 sf1_prevtime = datetime.now()
 sf2_prevtime = datetime.now()
 
-ardData = serial.Serial('com10',9600) #Create object to take data
-time.sleep(1)
+try:
 
+    ardData = serial.Serial('com10',9600) #Create object to take data
+    time.sleep(1)
+except:
+
+    messagebox.showerror("Error", "Not connected with the system, Try again!") 
 
 def updates():
     
-    dataPack = ardData.readline() #If there is data, store them in the dataPack variable
-    dataPack = str(dataPack,'utf-8') #Get rid of unwanted characters
-    dataPack = dataPack.strip('\r\n') #Get rid of the newline and other characters
-    dataPack = dataPack.split(",")
-    print(dataPack)
+    try :
 
-    #status == 0 -> Not active 
-    #status == 1 -> Active (Lecture Ongoing) 
-    #status == 2 -> Before Delay (Pre condition)
-    #status == 3 -> After Delay (Time before automatically switch off)
-    #status == 4 -> Power Saving 
+        dataPack = ardData.readline() #If there is data, store them in the dataPack variable
+        dataPack = str(dataPack,'utf-8') #Get rid of unwanted characters
+        dataPack = dataPack.strip('\r\n') #Get rid of the newline and other characters
+        dataPack = dataPack.split(",")
+        print(dataPack)
 
-    #SF 1 Status
-    if dataPack[0] == "1":
-        sf1_state.set("SF 1 - ACTIVE") 
-        label_sf1.config(background="green") 
-        label_sf1.update()
+        #status == 0 -> Not active 
+        #status == 1 -> Active (Lecture Ongoing) 
+        #status == 2 -> Before Delay (Pre condition)
+        #status == 3 -> After Delay (Time before automatically switch off)
+        #status == 4 -> Power Saving 
 
-    elif dataPack[0] == "2":
-        sf1_state.set("SF 1 - Pre Conditioning") 
-        label_sf1.config(background="khaki") 
-        label_sf1.update()
+        #SF 1 Status
+        if dataPack[0] == "1":
+            sf1_state.set("SF 1 - ACTIVE") 
+            label_sf1.config(background="green") 
+            label_sf1.update()
 
-
-    elif dataPack[0] == "3":
-        sf1_state.set("SF 1 - Post active delay") 
-        label_sf1.config(background="salmon1") 
-        label_sf1.update()
-
-    elif dataPack[0] == "4":
-        sf1_state.set("SF 1 - Power Saving") 
-        label_sf1.config(background="SpringGreen2") 
-        label_sf1.update()
-
-    else:
-        sf1_state.set("SF 1 - INACTIVE")
-        label_sf1.config(background="IndianRed1")  
-        label_sf1.update()
-
-    #SF 2  Status
-    if dataPack[1] == "1":
-
-        sf2_state.set("SF 2 - ACTIVE") 
-        label_sf2.config(background="green") 
-        label_sf2.update()
-
-    elif dataPack[1] == "2":
-        sf2_state.set("SF 2 - Pre Conditioning") 
-        label_sf2.config(background="khaki") 
-        label_sf2.update()
+        elif dataPack[0] == "2":
+            sf1_state.set("SF 1 - Pre Conditioning") 
+            label_sf1.config(background="khaki") 
+            label_sf1.update()
 
 
-    elif dataPack[1] == "3":
-        sf2_state.set("SF 2 - Post active delay") 
-        label_sf2.config(background="salmon1") 
-        label_sf2.update()
+        elif dataPack[0] == "3":
+            sf1_state.set("SF 1 - Post active delay") 
+            label_sf1.config(background="salmon1") 
+            label_sf1.update()
 
-    elif dataPack[1] == "4":
-        sf2_state.set("SF 2 - Power Saving") 
-        label_sf2.config(background="SpringGreen2") 
-        label_sf2.update()
+        elif dataPack[0] == "4":
+            sf1_state.set("SF 1 - Power Saving") 
+            label_sf1.config(background="SpringGreen2") 
+            label_sf1.update()
+
+        else:
+            sf1_state.set("SF 1 - INACTIVE")
+            label_sf1.config(background="IndianRed1")  
+            label_sf1.update()
+
+        #SF 2  Status
+        if dataPack[1] == "1":
+
+            sf2_state.set("SF 2 - ACTIVE") 
+            label_sf2.config(background="green") 
+            label_sf2.update()
+
+        elif dataPack[1] == "2":
+            sf2_state.set("SF 2 - Pre Conditioning") 
+            label_sf2.config(background="khaki") 
+            label_sf2.update()
+
+
+        elif dataPack[1] == "3":
+            sf2_state.set("SF 2 - Post active delay") 
+            label_sf2.config(background="salmon1") 
+            label_sf2.update()
+
+        elif dataPack[1] == "4":
+            sf2_state.set("SF 2 - Power Saving") 
+            label_sf2.config(background="SpringGreen2") 
+            label_sf2.update()
+        
+        else:
+            sf2_state.set("SF 2 - INACTIVE")
+            label_sf2.config(background="IndianRed1") 
+            label_sf2.update()
+
+    #SF 1 Sensor Reading
+
+        if dataPack[2] == "1":
+            
+            global sf1_prevtime 
+            sf1_prevtime = datetime.now()
+            
     
-    else:
-        sf2_state.set("SF 2 - INACTIVE")
-        label_sf2.config(background="IndianRed1") 
-        label_sf2.update()
+            sf1_state_sensor.set("SF 1 - DETECTED") 
+            label_sf1_sensor.config(background="green") 
+            label_sf1_sensor.update()
 
-#SF 1 Sensor Reading
-
-    if dataPack[2] == "1":
-        
-        global sf1_prevtime 
-        sf1_prevtime = datetime.now()
-        
-  
-        sf1_state_sensor.set("SF 1 - DETECTED") 
-        label_sf1_sensor.config(background="green") 
-        label_sf1_sensor.update()
-
-    else:
-        now = datetime.now()
-        diff = now-sf1_prevtime
-        a = int(diff.total_seconds())
+        else:
+            now = datetime.now()
+            diff = now-sf1_prevtime
+            a = int(diff.total_seconds())
 
 
-        sf1_state_sensor.set("SF 1 - Last Detected "+str(a)+" seconds ago!")
-        label_sf1_sensor.config(background="IndianRed1") 
-        label_sf1_sensor.update()
+            sf1_state_sensor.set("SF 1 - Last Detected "+str(a)+" seconds ago!")
+            label_sf1_sensor.config(background="IndianRed1") 
+            label_sf1_sensor.update()
 
-#SF 2 Sensor Reading
-    if dataPack[3] == "1":
+    #SF 2 Sensor Reading
+        if dataPack[3] == "1":
 
-        
-        global sf2_prevtime 
-        sf2_prevtime = datetime.now()
-        
-        sf2_state_sensor.set("SF 2 - DETECTED") 
-        label_sf2_sensor.config(background="green") 
-        label_sf2_sensor.update()
+            
+            global sf2_prevtime 
+            sf2_prevtime = datetime.now()
+            
+            sf2_state_sensor.set("SF 2 - DETECTED") 
+            label_sf2_sensor.config(background="green") 
+            label_sf2_sensor.update()
 
-    else:
-        now = datetime.now()
-        diff = now-sf2_prevtime
-        a = int(diff.total_seconds())
-
-
-        sf2_state_sensor.set("SF 2 - Last Detected "+str(a)+" seconds ago!")
-        label_sf2_sensor.config(background="IndianRed1") 
-        label_sf2_sensor.update()
-
-    #Update delay labels
-
-    label_sf1_beforeDelay.config(text="Before Delay :"+dataPack[4])
-    label_sf1_beforeDelay.update()
+        else:
+            now = datetime.now()
+            diff = now-sf2_prevtime
+            a = int(diff.total_seconds())
 
 
-    label_sf1_afterDelay.config(text="After Delay :"+dataPack[5])
-    label_sf1_afterDelay.update()
+            sf2_state_sensor.set("SF 2 - Last Detected "+str(a)+" seconds ago!")
+            label_sf2_sensor.config(background="IndianRed1") 
+            label_sf2_sensor.update()
+
+        #Update delay labels
+
+        label_sf1_beforeDelay.config(text="Before Delay :"+dataPack[4])
+        label_sf1_beforeDelay.update()
 
 
-    label_sf2_beforeDelay.config(text="Before Delay :"+dataPack[6])
-    label_sf2_beforeDelay.update()
+        label_sf1_afterDelay.config(text="After Delay :"+dataPack[5])
+        label_sf1_afterDelay.update()
 
 
-    label_sf2_afterDelay.config(text="After Delay :"+dataPack[7])
-    label_sf2_afterDelay.update()
-
-    #Update powerSaving Labels
-
-    if dataPack[8] == "1":
-        label_sf1_psMode.config(text="Power Saving : ON")
-
-    else:
-        label_sf1_psMode.config(text="Power Saving : OFF")
+        label_sf2_beforeDelay.config(text="Before Delay :"+dataPack[6])
+        label_sf2_beforeDelay.update()
 
 
-    if dataPack[9] == "1":
-        label_sf2_psMode.config(text="Power Saving : ON")
+        label_sf2_afterDelay.config(text="After Delay :"+dataPack[7])
+        label_sf2_afterDelay.update()
 
-    else:
-        label_sf2_psMode.config(text="Power Saving : OFF")
+        #Update powerSaving Labels
 
-    root.after(1000,updates)
+        if dataPack[8] == "1":
+            label_sf1_psMode.config(text="Power Saving : ON")
+
+        else:
+            label_sf1_psMode.config(text="Power Saving : OFF")
+
+
+        if dataPack[9] == "1":
+            label_sf2_psMode.config(text="Power Saving : ON")
+
+        else:
+            label_sf2_psMode.config(text="Power Saving : OFF")
+
+        root.after(1000,updates)
+
+    except:
+            messagebox.showerror("Error", "Error occured! Restart the application and try again!") 
+
 
 #Tkinter Objects and Variables
 root = Tk()
 root.title("Classroom Resource Management System")
+root.geometry("940x450")
+root.resizable(False,False)
 
 p1c1 = IntVar()
 p2c1 = IntVar()
