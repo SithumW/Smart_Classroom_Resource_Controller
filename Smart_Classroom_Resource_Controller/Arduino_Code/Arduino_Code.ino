@@ -324,6 +324,7 @@ else{
 // If Serial is available (Read Data)
 
 //SF 1 Time Details
+
 hall_1[0] =Serial.readStringUntil(':');
 EEPROM.write(0,hall_1[0].toInt());
 

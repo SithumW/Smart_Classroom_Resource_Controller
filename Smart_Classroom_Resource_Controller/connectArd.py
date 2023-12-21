@@ -271,7 +271,7 @@ def Onclick():
 
 def change1(tmp): 
     print(tmp)
-    if tmp == 1:
+    if tmp > 1:
         b1.configure(bg="#24ff53")
         b2.configure(bg="white",fg="black")
     else :
@@ -279,7 +279,7 @@ def change1(tmp):
         b2.configure(bg="red",fg="white")
 
 def change2(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b3.configure(bg="#24ff53")
         b4.configure(bg="white",fg="black")
     else :
@@ -287,7 +287,7 @@ def change2(tmp):
         b4.configure(bg="red",fg="white")
 
 def change3(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b5.configure(bg="#24ff53")
         b6.configure(bg="white",fg="black")
     else :
@@ -295,7 +295,7 @@ def change3(tmp):
         b6.configure(bg="red",fg="white")
 
 def change4(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b7.configure(bg="#24ff53")
         b8.configure(bg="white",fg="black")
     else :
@@ -304,22 +304,22 @@ def change4(tmp):
 
 
 
-b1 = Radiobutton(window, text = "ON",value=1,variable=p1c1,font=("Arial",10,"bold"),fg="#012b3b", command=lambda:change1(p1c1.get()))
+b1 = Radiobutton(window, text = "ON",value=8,variable=p1c1,font=("Arial",10,"bold"),fg="#012b3b", command=lambda:change1(p1c1.get()))
 b1.place(x=350, y=180)
 b2 = Radiobutton(window, text = "OFF",value=0,variable=p1c1,font=("Arial",10,"bold",),fg="#012b3b",command=lambda:change1(p1c1.get()))
 b2.place(x=430, y=180,)
 
-b3 = Radiobutton(window, text = "ON",value=1,variable=p2c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change2(p2c1.get()))
+b3 = Radiobutton(window, text = "ON",value=10,variable=p2c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change2(p2c1.get()))
 b3.place(x=350, y=214)
 b4 = Radiobutton(window, text = "OFF",value=0,variable=p2c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change2(p2c1.get()))
 b4.place(x=430, y=214)
 
-b5 = Radiobutton(window, text = "ON",value=1,variable=p3c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change3(p3c1.get()))
+b5 = Radiobutton(window, text = "ON",value=13,variable=p3c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change3(p3c1.get()))
 b5.place(x=350, y=248)
 b6 = Radiobutton(window, text = "OFF",value=0,variable=p3c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change3(p3c1.get()))
 b6.place(x=430, y=248)
 
-b7 = Radiobutton(window, text = "ON",value=1,variable=p4c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change4(p4c1.get()))
+b7 = Radiobutton(window, text = "ON",value=15,variable=p4c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change4(p4c1.get()))
 b7.place(x=350, y=281)
 b8 = Radiobutton(window, text = "OFF",value=0,variable=p4c1,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change4(p4c1.get()))
 b8.place(x=430, y=281)
@@ -331,7 +331,7 @@ b8.place(x=430, y=281)
 
 
 def change5(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b9.configure(bg="#24ff53")
         b10.configure(bg="white",fg="black")
     else :
@@ -339,7 +339,7 @@ def change5(tmp):
         b10.configure(bg="red",fg="white")
 
 def change6(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b11.configure(bg="#24ff53")
         b12.configure(bg="white",fg="black")
     else :
@@ -347,7 +347,7 @@ def change6(tmp):
         b12.configure(bg="red",fg="white")
 
 def change7(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b13.configure(bg="#24ff53")
         b14.configure(bg="white",fg="black")
     else :
@@ -355,29 +355,29 @@ def change7(tmp):
         b14.configure(bg="red",fg="white")
 
 def change8(tmp): 
-    if tmp == 1:
+    if tmp > 1:
         b15.configure(bg="#24ff53")
         b16.configure(bg="white",fg="black")
     else :
         b15.configure(bg="white")
         b16.configure(bg="red",fg="white")
 
-b9 = Radiobutton(window, text = "ON",value=1,variable=p1c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change5(p1c2.get()))
+b9 = Radiobutton(window, text = "ON",value=8,variable=p1c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change5(p1c2.get()))
 b9.place(x=645, y=180)
 b10 = Radiobutton(window, text = "OFF",value=0,variable=p1c2,font=("Arial",10,"bold",),fg="#012b3b",command=lambda:change5(p1c2.get()))
 b10.place(x=725, y=180,)
 
-b11 = Radiobutton(window, text = "ON",value=1,variable=p2c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change6(p2c2.get()))
+b11 = Radiobutton(window, text = "ON",value=10,variable=p2c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change6(p2c2.get()))
 b11.place(x=645, y=214)
 b12 = Radiobutton(window, text = "OFF",value=0,variable=p2c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change6(p2c2.get()))
 b12.place(x=725, y=214)
 
-b13 = Radiobutton(window, text = "ON",value=1,variable=p3c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change7(p3c2.get()))
+b13 = Radiobutton(window, text = "ON",value=13,variable=p3c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change7(p3c2.get()))
 b13.place(x=645, y=248)
 b14 = Radiobutton(window, text = "OFF",value=0,variable=p3c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change7(p3c2.get()))
 b14.place(x=725, y=248)
 
-b15 = Radiobutton(window, text = "ON",value=1,variable=p4c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change8(p4c2.get()))
+b15 = Radiobutton(window, text = "ON",value=15,variable=p4c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change8(p4c2.get()))
 b15.place(x=645, y=281)
 b16 = Radiobutton(window, text = "OFF",value=0,variable=p4c2,font=("Arial",10,"bold"),fg="#012b3b",command=lambda:change8(p4c2.get()))
 b16.place(x=725, y=281)
