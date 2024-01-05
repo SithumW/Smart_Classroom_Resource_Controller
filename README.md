@@ -4,7 +4,7 @@ Welcome to the Smart Classroom Resource Controller repository! This project aims
 
 ## Overview
 
-In a modern classroom, efficient control and management of resources play a crucial role in enhancing the learning experience. The Smart Classroom Resource Controller is designed to streamline the utilization of various resources such as lights, projectors, and other smart devices.
+In a modern classroom, efficient control and management of resources play a crucial role in enhancing the learning experience. The Smart Classroom Resource Controller is can be improved to streamline the utilization of various resources such as lights, projectors, and other smart devices.
 
 ## Features
 
